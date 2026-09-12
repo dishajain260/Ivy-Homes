@@ -1,156 +1,155 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login, DEMO_USERS, DEMO_PASSWORD } from "../api/client";
-import { Sparkles, KeyRound, Lock, Mail, ArrowRight, ShieldCheck, CheckCircle2, AlertCircle } from "lucide-react";
+import { login } from "../api/client";
+import { Lock, Mail, ArrowRight, AlertCircle, Eye, EyeOff, Building2, CheckCircle2 } from "lucide-react";
 
 export default function LoginPage({ onLoginSuccess }) {
   const navigate = useNavigate();
-  const [email, setEmail] = useState(DEMO_USERS[0]);
-  const [password, setPassword] = useState(DEMO_PASSWORD);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!email.trim() || !password.trim()) {
+      setError("Please enter both email and password.");
+      return;
+    }
+
     setLoading(true);
     setError(null);
     try {
-      await login(email, password);
+      await login(email.trim(), password.trim());
       if (onLoginSuccess) onLoginSuccess();
       navigate("/");
     } catch (err) {
-      setError(err.message || "Failed to authenticate with server");
+      setError(err.message || "Invalid credentials. Authorized Ivy Homes account required.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSelectDemo = (demoEmail) => {
-    setEmail(demoEmail);
-    setPassword(DEMO_PASSWORD);
-    setError(null);
-  };
-
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-slate-50 via-ivy-50/30 to-slate-100">
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-slate-200/80 p-8">
+    <div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black text-white relative overflow-hidden">
+      
+      {/* Decorative background glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
+
+      {/* Main Container */}
+      <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         
-        {/* Header */}
+        {/* Brand Logo Header */}
         <div className="text-center mb-8">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-ivy-600 to-ivy-800 flex items-center justify-center text-white mx-auto shadow-lg shadow-ivy-600/25 mb-4">
-            <Sparkles className="w-7 h-7 text-ivy-200" />
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 text-slate-950 shadow-xl shadow-emerald-500/20 mb-4 ring-4 ring-emerald-500/20">
+            <Building2 className="w-7 h-7 font-black" />
           </div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Welcome to Ivy Homes</h1>
-          <p className="text-sm text-slate-500 mt-1 font-medium">Chennai Real Estate Intelligence Portal</p>
+          <h1 className="text-3xl font-extrabold tracking-tight text-white">Ivy Homes</h1>
+          <p className="mt-2 text-sm text-slate-400 font-medium">
+            Chennai Premium Property & Analytics Portal
+          </p>
         </div>
 
-        {/* Demo Accounts Selector */}
-        <div className="mb-6 p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-ivy-600" />
-              Demo Credentials
-            </span>
-            <span className="text-[11px] font-semibold text-ivy-700 bg-ivy-100 px-2 py-0.5 rounded-full">
-              Pre-authorized
-            </span>
+        {/* Login Card */}
+        <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 shadow-2xl shadow-black/50">
+          
+          <div className="mb-6">
+            <h2 className="text-lg font-bold text-white">Sign In to Your Account</h2>
+            <p className="text-xs text-slate-400 mt-0.5">
+              Enter your authorized email address and password to continue.
+            </p>
           </div>
-          <p className="text-xs text-slate-500 mb-3">
-            Click any demo account below to auto-fill credentials:
-          </p>
-          <div className="grid grid-cols-3 gap-2">
-            {DEMO_USERS.map((u, i) => {
-              const isSelected = email === u;
-              return (
+
+          {/* Error Alert */}
+          {error && (
+            <div className="mb-6 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs font-medium flex items-start gap-3">
+              <AlertCircle className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" />
+              <div className="flex-1 leading-relaxed">{error}</div>
+            </div>
+          )}
+
+          {/* Normal Form */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                Email Address
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="name@ivy.homes"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950/70 border border-slate-800 text-sm font-medium text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition"
+                  autoComplete="email"
+                />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                  Password
+                </label>
+              </div>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                  <Lock className="w-4 h-4" />
+                </div>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••••••"
+                  className="w-full pl-10 pr-11 py-3 rounded-xl bg-slate-950/70 border border-slate-800 text-sm font-medium text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition"
+                  autoComplete="current-password"
+                />
                 <button
-                  key={u}
                   type="button"
-                  onClick={() => handleSelectDemo(u)}
-                  className={`py-2 px-2.5 rounded-xl text-xs font-semibold border transition text-center ${
-                    isSelected
-                      ? "bg-ivy-600 border-ivy-600 text-white shadow-sm"
-                      : "bg-white border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
-                  }`}
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-500 hover:text-slate-300 transition"
                 >
-                  Demo {i + 1}
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Error Alert */}
-        {error && (
-          <div className="mb-6 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 text-rose-500 flex-shrink-0" />
-            <span>{error}</span>
-          </div>
-        )}
-
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1.5">Email Address</label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                <Mail className="w-4 h-4" />
               </div>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-ivy-500/20 focus:border-ivy-500 transition"
-                placeholder="demo1@ivy.homes"
-              />
             </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full mt-2 py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold text-sm shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-2 disabled:opacity-50 active:scale-[0.99]"
+            >
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <span className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin"></span>
+                  Authenticating...
+                </span>
+              ) : (
+                <>
+                  <span>Sign In</span>
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </button>
+          </form>
+
+          {/* Footer security badge */}
+          <div className="mt-8 pt-6 border-t border-slate-800/80 flex items-center justify-center gap-2 text-[11px] text-slate-500 font-medium">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+            <span>End-to-End Encrypted Session • Real-time Token Management</span>
           </div>
 
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1.5">Password</label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                <Lock className="w-4 h-4" />
-              </div>
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-ivy-500/20 focus:border-ivy-500 transition font-mono"
-                placeholder="••••••••"
-              />
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full mt-2 py-3 px-4 rounded-xl bg-gradient-to-r from-ivy-600 to-ivy-700 hover:from-ivy-700 hover:to-ivy-800 text-white text-sm font-bold shadow-md shadow-ivy-600/20 transition flex items-center justify-center gap-2 disabled:opacity-50"
-          >
-            {loading ? (
-              <span className="flex items-center gap-2">
-                <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                Authenticating...
-              </span>
-            ) : (
-              <>
-                <span>Sign In to Chennai Portal</span>
-                <ArrowRight className="w-4 h-4" />
-              </>
-            )}
-          </button>
-        </form>
-
-        <div className="mt-6 pt-6 border-t border-slate-100 text-center">
-          <p className="text-[11px] text-slate-400 font-medium leading-relaxed">
-            Connected to <span className="font-mono text-slate-600">solve.ivy.homes</span> API.
-            <br />
-            Background tokens automatically refresh before 15m expiry.
-          </p>
         </div>
 
       </div>
+
     </div>
   );
 }
