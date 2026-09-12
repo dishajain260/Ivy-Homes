@@ -338,7 +338,7 @@ export default function ListingDetailPage() {
             <div className="space-y-3">
               <a
                 href={`tel:${listing.posted_by_contact}`}
-                className="w-full py-3.5 px-4 rounded-xl bg-slate-900 hover:bg-emerald-600 text-white text-xs font-bold flex items-center justify-center gap-2 transition shadow-md"
+                className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-2 transition shadow-md shadow-emerald-600/20"
               >
                 <Phone className="w-4 h-4" />
                 Call {listing.posted_by_contact || "Seller"}

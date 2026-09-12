@@ -38,14 +38,18 @@ export default function InsightsPage() {
   ];
 
   return (
-    <div className="min-h-screen pb-16">
+    <div className="min-h-screen pb-20">
       
-      {/* Hero Header */}
-      <section className="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white pt-12 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b border-slate-800">
+      {/* Luxury Hero Banner */}
+      <section className="bg-gradient-to-br from-[#064e3b] via-[#065f46] to-[#042f2e] text-white pt-14 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        
+        {/* Glow */}
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-emerald-400/10 rounded-full blur-3xl pointer-events-none" />
+
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-extrabold uppercase tracking-wider mb-4">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-emerald-200 text-xs font-bold uppercase tracking-wider mb-4">
+              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
               <span>Market Intelligence & API Audit</span>
             </div>
 
@@ -53,7 +57,7 @@ export default function InsightsPage() {
               Chennai Real Estate Insights
             </h1>
 
-            <p className="mt-3 text-sm text-slate-300 font-medium leading-relaxed">
+            <p className="mt-3 text-base text-emerald-100/90 font-medium leading-relaxed">
               Empirical market aggregates derived from complete city datasets, plus our full 18-point verification audit of documentation discrepancies.
             </p>
           </div>
@@ -61,10 +65,10 @@ export default function InsightsPage() {
       </section>
 
       {/* Floating KPI Cards Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           
-          <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xl shadow-slate-950/5">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
               <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500">Audited Listings</span>
               <Home className="w-5 h-5 text-emerald-600" />
@@ -72,12 +76,12 @@ export default function InsightsPage() {
             <div className="text-3xl font-black text-slate-900">
               {answers.total_listing_records.toLocaleString()}
             </div>
-            <div className="text-xs text-emerald-600 font-bold mt-1">
+            <div className="text-xs text-emerald-700 font-bold mt-1">
               {answers.active_listings.toLocaleString()} Active • 3,717 Distinct
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xl shadow-slate-950/5">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
               <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500">Avg 2 BHK Rate</span>
               <TrendingUp className="w-5 h-5 text-emerald-600" />
@@ -90,7 +94,7 @@ export default function InsightsPage() {
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xl shadow-slate-950/5">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
               <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500">Guindy Total Rent</span>
               <DollarSign className="w-5 h-5 text-emerald-600" />
@@ -103,7 +107,7 @@ export default function InsightsPage() {
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xl shadow-slate-950/5">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
               <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500">Costliest Project</span>
               <Building2 className="w-5 h-5 text-emerald-600" />
@@ -120,7 +124,7 @@ export default function InsightsPage() {
       </div>
 
       {/* Main Content Tabs & Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
         
         {/* Tab Buttons */}
         <div className="flex border-b border-slate-200 mb-8 space-x-6 text-sm font-bold">
@@ -128,7 +132,7 @@ export default function InsightsPage() {
             onClick={() => setActiveTab("overview")}
             className={`pb-3.5 transition flex items-center gap-2 border-b-2 ${
               activeTab === "overview"
-                ? "border-emerald-600 text-emerald-700"
+                ? "border-emerald-600 text-emerald-800 font-extrabold"
                 : "border-transparent text-slate-500 hover:text-slate-800"
             }`}
           >
@@ -140,35 +144,35 @@ export default function InsightsPage() {
             onClick={() => setActiveTab("discrepancies")}
             className={`pb-3.5 transition flex items-center gap-2 border-b-2 ${
               activeTab === "discrepancies"
-                ? "border-emerald-600 text-emerald-700"
+                ? "border-emerald-600 text-emerald-800 font-extrabold"
                 : "border-transparent text-slate-500 hover:text-slate-800"
             }`}
           >
             <ShieldAlert className="w-4 h-4 text-amber-500" />
-            Documentation Lies & Findings ({findings.length})
+            Documentation Discrepancies ({findings.length})
           </button>
 
           <button
             onClick={() => setActiveTab("anomalies")}
             className={`pb-3.5 transition flex items-center gap-2 border-b-2 ${
               activeTab === "anomalies"
-                ? "border-emerald-600 text-emerald-700"
+                ? "border-emerald-600 text-emerald-800 font-extrabold"
                 : "border-transparent text-slate-500 hover:text-slate-800"
             }`}
           >
             <AlertTriangle className="w-4 h-4 text-rose-500" />
-            Corrupt & Fraud Auditing (36 + 9)
+            Corrupt & Bait Audit (36 + 9)
           </button>
         </div>
 
         {/* TAB 1: Locality Intelligence */}
         {activeTab === "overview" && (
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
-            <h2 className="text-lg font-black text-slate-900 mb-1">
+          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-card">
+            <h2 className="text-lg font-bold text-slate-900 mb-1">
               Chennai Locality Aggregates
             </h2>
             <p className="text-xs text-slate-500 mb-6">
-              Computed city-wide statistics to satisfy the intended functionality of the 404’d <code className="font-mono bg-slate-100 px-1 py-0.5 rounded text-[11px]">/v1/analytics/summary</code>.
+              Computed city-wide statistics satisfying the intended purpose of the missing <code className="font-mono bg-slate-100 px-1 py-0.5 rounded text-[11px]">/v1/analytics/summary</code> endpoint.
             </p>
 
             <div className="overflow-x-auto">
@@ -212,7 +216,7 @@ export default function InsightsPage() {
         {/* TAB 2: Documentation Discrepancies */}
         {activeTab === "discrepancies" && (
           <div className="space-y-6">
-            <div className="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-card flex flex-col sm:flex-row items-center justify-between gap-3">
               <div className="relative w-full sm:w-80">
                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
                 <input
@@ -220,7 +224,7 @@ export default function InsightsPage() {
                   value={searchFinding}
                   onChange={(e) => setSearchFinding(e.target.value)}
                   placeholder="Search findings by endpoint or text..."
-                  className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                 />
               </div>
 
@@ -231,7 +235,7 @@ export default function InsightsPage() {
                     onClick={() => setFindingCategory(c)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold transition capitalize flex-shrink-0 ${
                       findingCategory === c
-                        ? "bg-slate-900 text-emerald-400 shadow-sm"
+                        ? "bg-emerald-600 text-white shadow-xs"
                         : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                     }`}
                   >
@@ -243,27 +247,27 @@ export default function InsightsPage() {
 
             <div className="space-y-4">
               {filteredFindings.map((f, i) => (
-                <div key={i} className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm hover:border-slate-300 transition">
+                <div key={i} className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-card hover:border-slate-300 transition">
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-2">
-                      <span className="px-3 py-1 rounded-xl text-xs font-mono font-bold bg-slate-900 text-white">
+                      <span className="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-slate-900 text-white">
                         {f.endpoint}
                       </span>
-                      <span className="px-3 py-1 rounded-xl text-xs font-bold bg-amber-100 text-amber-900 uppercase tracking-wider">
+                      <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-900 uppercase tracking-wider">
                         {f.category}
                       </span>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs mt-3 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs mt-3 bg-slate-50 p-4 rounded-xl border border-slate-100">
                     <div>
-                      <span className="font-extrabold text-rose-600 uppercase tracking-wider block mb-1">
+                      <span className="font-bold text-rose-600 uppercase tracking-wider block mb-1">
                         Documented Claim
                       </span>
                       <p className="text-slate-700 leading-relaxed font-mono text-[11px]">{f.documented}</p>
                     </div>
                     <div>
-                      <span className="font-extrabold text-emerald-700 uppercase tracking-wider block mb-1">
+                      <span className="font-bold text-emerald-700 uppercase tracking-wider block mb-1">
                         Actual Observed Behavior
                       </span>
                       <p className="text-slate-800 leading-relaxed font-medium">{f.actual}</p>
@@ -301,13 +305,13 @@ export default function InsightsPage() {
         {activeTab === "anomalies" && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
-            <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-card">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center font-black">
                   36
                 </div>
                 <div>
-                  <h3 className="text-base font-extrabold text-slate-900">Corrupt Listing Records</h3>
+                  <h3 className="text-base font-bold text-slate-900">Corrupt Listing Records</h3>
                   <p className="text-xs text-slate-500">Physically impossible entities generated in batches of 9</p>
                 </div>
               </div>
@@ -328,13 +332,13 @@ export default function InsightsPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-card">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-2xl bg-orange-100 text-orange-700 flex items-center justify-center font-black">
                   9
                 </div>
                 <div>
-                  <h3 className="text-base font-extrabold text-slate-900">Fake / Bait Listings</h3>
+                  <h3 className="text-base font-bold text-slate-900">Fake / Bait Listings</h3>
                   <p className="text-xs text-slate-500">Commercial bait posted to generate enquiries</p>
                 </div>
               </div>
@@ -348,7 +352,7 @@ export default function InsightsPage() {
                 {answers.fake_listing_ids.map((id) => (
                   <div key={id} className="p-2.5 bg-white rounded-xl border border-slate-200 text-slate-800 flex items-center justify-between font-bold">
                     <span>{id}</span>
-                    <span className="text-[11px] text-orange-600 font-sans font-extrabold">Enquiry Generator</span>
+                    <span className="text-[11px] text-orange-600 font-sans font-bold">Enquiry Generator</span>
                   </div>
                 ))}
               </div>

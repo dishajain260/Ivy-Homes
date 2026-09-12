@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { getListings, getSaved } from "../api/client";
 import PropertyCard from "../components/PropertyCard";
-import { Search, Filter, SlidersHorizontal, ArrowUpDown, ChevronLeft, ChevronRight, RefreshCw, AlertCircle, Home, Sparkles, MapPin, CheckCircle2 } from "lucide-react";
+import { Search, Filter, ArrowUpDown, ChevronLeft, ChevronRight, RefreshCw, AlertCircle, Home, Sparkles, MapPin, CheckCircle2, X } from "lucide-react";
 
 const CHENNAI_LOCALITIES = [
   "All",
@@ -44,8 +44,6 @@ export default function ListingsPage() {
   const [bhk, setBhk] = useState("All");
   const [propertyType, setPropertyType] = useState("All");
   const [furnishing, setFurnishing] = useState("All");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
   const [liveOnly, setLiveOnly] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -53,7 +51,6 @@ export default function ListingsPage() {
   const [sortBy, setSortBy] = useState("posted_at");
   const [order, setOrder] = useState("desc");
   const [offset, setOffset] = useState(0);
-  const [totalCount, setTotalCount] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const limit = 50;
 
@@ -73,15 +70,12 @@ export default function ListingsPage() {
         locality: locality !== "All" ? locality : undefined,
         bhk: bhk !== "All" ? bhk : undefined,
         property_type: propertyType !== "All" ? propertyType : undefined,
-        min_price: minPrice ? Number(minPrice) : undefined,
-        max_price: maxPrice ? Number(maxPrice) : undefined,
         furnishing: furnishing !== "All" ? furnishing : undefined,
         sort_by: sortBy,
         order
       });
 
       setListings(data.results || []);
-      setTotalCount(data.total || 0);
       setHasMore(data.has_more ?? false);
     } catch (err) {
       setError(err.message || "Failed to load listings");
@@ -97,8 +91,8 @@ export default function ListingsPage() {
   const displayedListings = useMemo(() => {
     return listings.filter((item) => {
       if (liveOnly && item.is_live === false) return false;
-      if (searchQuery) {
-        const q = searchQuery.toLowerCase();
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase().trim();
         const matchesApt = (item.apartment_name || "").toLowerCase().includes(q);
         const matchesLoc = (item.locality || "").toLowerCase().includes(q);
         const matchesDesc = (item.description || "").toLowerCase().includes(q);
@@ -122,73 +116,93 @@ export default function ListingsPage() {
     setBhk("All");
     setPropertyType("All");
     setFurnishing("All");
-    setMinPrice("");
-    setMaxPrice("");
     setLiveOnly(true);
     setSearchQuery("");
     setOffset(0);
   };
 
+  const activeFilterCount = (locality !== "All" ? 1 : 0) + 
+                            (bhk !== "All" ? 1 : 0) + 
+                            (propertyType !== "All" ? 1 : 0) + 
+                            (furnishing !== "All" ? 1 : 0) + 
+                            (searchQuery ? 1 : 0);
+
   return (
-    <div className="min-h-screen pb-16">
+    <div className="min-h-screen pb-20">
       
-      {/* Hero Header Section */}
-      <section className="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white pt-12 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b border-slate-800">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Luxury Hero Banner */}
+      <section className="bg-gradient-to-br from-[#064e3b] via-[#065f46] to-[#042f2e] text-white pt-14 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        
+        {/* Subtle Ambient Radial Lighting */}
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-emerald-400/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-teal-400/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto relative z-10">
-          
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-extrabold uppercase tracking-wider mb-4">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Verified Chennai Real Estate</span>
+            
+            {/* Top Pill */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-emerald-200 text-xs font-bold uppercase tracking-wider mb-4">
+              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+              <span>Chennai Real Estate Intelligence</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white leading-tight">
-              Discover Exceptional Homes in Chennai
+            {/* Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
+              Exceptional Homes, <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 via-teal-100 to-white">
+                Verified Pricing.
+              </span>
             </h1>
 
-            <p className="mt-3 text-base text-slate-300 font-medium leading-relaxed">
-              Explore verified residential apartments, builder floors, and gated societies. Filter with guaranteed precision across all neighborhoods.
+            {/* Subhead */}
+            <p className="mt-4 text-base text-emerald-100/90 font-medium leading-relaxed">
+              Explore 3,233+ verified residential properties across Chennai’s most sought-after neighborhoods with unit-corrected square footage and authentic pricing.
             </p>
 
-            {/* Quick Stats Pill Chips */}
-            <div className="flex flex-wrap items-center gap-3 mt-6 text-xs font-semibold text-slate-300">
-              <span className="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                3,233+ Active Listings
+            {/* Benchmark Pill Strip */}
+            <div className="flex flex-wrap items-center gap-2.5 mt-6 text-xs font-semibold">
+              <span className="px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 text-white flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" />
+                3,233 Active Listings
               </span>
-              <span className="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-                10 Prime Localities
+              <span className="px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 text-white flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-emerald-300" />
+                10 Core Localities
               </span>
-              <span className="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center gap-2">
-                <span className="text-emerald-400">₹9,845</span> Avg 2BHK / sq.ft
+              <span className="px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 text-white flex items-center gap-1.5">
+                <span className="text-emerald-300 font-bold">₹9,845</span> Avg 2BHK / sq.ft
               </span>
             </div>
-          </div>
 
+          </div>
         </div>
       </section>
 
-      {/* Floating Filter Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20">
-        <div className="bg-white rounded-3xl border border-slate-200 p-5 sm:p-6 shadow-xl shadow-slate-950/5 space-y-4">
+      {/* Floating Filter Bar */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-20">
+        <div className="bg-white rounded-3xl border border-slate-200/90 shadow-card p-5 sm:p-6 space-y-4">
           
           {/* Row 1: Search and Dropdowns */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
             
             {/* Search Input */}
             <div className="lg:col-span-2 relative">
-              <Search className="w-4 h-4 text-slate-400 absolute left-4 top-3.5 pointer-events-none" />
+              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search apartment name, locality, keywords..."
-                className="w-full pl-11 pr-4 py-2.5 rounded-2xl border border-slate-200 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition"
+                placeholder="Search apartment, society, road..."
+                className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-medium text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
               />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 top-3 text-slate-400 hover:text-slate-600"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
             </div>
 
             {/* Locality */}
@@ -196,7 +210,7 @@ export default function ListingsPage() {
               <select
                 value={locality}
                 onChange={(e) => { setLocality(e.target.value); setOffset(0); }}
-                className="w-full px-4 py-2.5 rounded-2xl border border-slate-200 text-sm font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition bg-white"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
               >
                 {CHENNAI_LOCALITIES.map((loc) => (
                   <option key={loc} value={loc}>
@@ -211,7 +225,7 @@ export default function ListingsPage() {
               <select
                 value={propertyType}
                 onChange={(e) => { setPropertyType(e.target.value); setOffset(0); }}
-                className="w-full px-4 py-2.5 rounded-2xl border border-slate-200 text-sm font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition bg-white"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
               >
                 {PROPERTY_TYPES.map((t) => (
                   <option key={t} value={t}>
@@ -226,7 +240,7 @@ export default function ListingsPage() {
               <select
                 value={furnishing}
                 onChange={(e) => { setFurnishing(e.target.value); setOffset(0); }}
-                className="w-full px-4 py-2.5 rounded-2xl border border-slate-200 text-sm font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition bg-white"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
               >
                 {FURNISHING_OPTIONS.map((f) => (
                   <option key={f} value={f}>
@@ -238,25 +252,25 @@ export default function ListingsPage() {
 
           </div>
 
-          {/* Row 2: Bedroom Pills, Sort, Active Toggle */}
+          {/* Row 2: Bedroom Pills, Sorting, and Toggles */}
           <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-100 text-xs">
             
             {/* BHK Pills */}
             <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="font-extrabold text-slate-400 uppercase tracking-wider text-[11px] mr-1">BHK:</span>
+              <span className="font-bold text-slate-400 uppercase tracking-wider text-[11px] mr-1">Bedrooms:</span>
               {["All", "1", "2", "3", "4"].map((b) => {
                 const isSelected = bhk === b;
                 return (
                   <button
                     key={b}
                     onClick={() => { setBhk(b); setOffset(0); }}
-                    className={`px-3.5 py-1.5 rounded-xl font-bold transition ${
+                    className={`px-3 py-1.5 rounded-xl font-bold transition ${
                       isSelected
-                        ? "bg-slate-900 text-emerald-400 shadow-sm"
+                        ? "bg-emerald-600 text-white shadow-xs"
                         : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                     }`}
                   >
-                    {b === "All" ? "All" : `${b} BHK`}
+                    {b === "All" ? "Any BHK" : `${b} BHK`}
                   </button>
                 );
               })}
@@ -284,26 +298,29 @@ export default function ListingsPage() {
                     setOrder(o);
                     setOffset(0);
                   }}
-                  className="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-white"
+                  className="px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none"
                 >
                   <option value="posted_at-desc">Latest Added</option>
                   <option value="price-asc">Price: Low to High</option>
                   <option value="price-desc">Price: High to Low</option>
-                  <option value="carpet_area-desc">Largest Carpet Area</option>
+                  <option value="carpet_area-desc">Largest Area</option>
                   <option value="bedroom-desc">Most Bedrooms</option>
                 </select>
               </div>
 
-              <button
-                onClick={handleResetFilters}
-                className="text-xs font-bold text-slate-400 hover:text-slate-800 px-2 py-1 rounded hover:bg-slate-100"
-              >
-                Clear
-              </button>
+              {activeFilterCount > 0 && (
+                <button
+                  onClick={handleResetFilters}
+                  className="text-xs font-bold text-rose-600 hover:text-rose-700 px-2.5 py-1.5 rounded-xl hover:bg-rose-50 transition flex items-center gap-1"
+                >
+                  <X className="w-3.5 h-3.5" />
+                  <span>Reset ({activeFilterCount})</span>
+                </button>
+              )}
 
               <button
                 onClick={() => fetchListings()}
-                className="p-1.5 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-xl"
+                className="p-2 text-slate-400 hover:text-slate-800 hover:bg-slate-100 rounded-xl transition"
                 title="Refresh listings"
               >
                 <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin text-emerald-600" : ""}`} />
@@ -315,17 +332,32 @@ export default function ListingsPage() {
         </div>
       </div>
 
-      {/* Main Content Listings Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+      {/* Main Content Grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         
+        {/* Results Bar Header */}
+        {!loading && !error && (
+          <div className="flex items-center justify-between mb-6 text-sm text-slate-500 font-medium">
+            <div>
+              Showing <span className="font-bold text-slate-900">{displayedListings.length}</span> properties
+              {locality !== "All" && (
+                <span> in <span className="font-bold text-emerald-700">{locality}</span></span>
+              )}
+            </div>
+            <div className="text-xs text-slate-400 hidden sm:block">
+              Data verified against Ivy Homes registry
+            </div>
+          </div>
+        )}
+
         {error ? (
-          <div className="p-8 text-center bg-rose-50 border border-rose-200 rounded-3xl text-rose-700">
+          <div className="p-8 text-center bg-rose-50 border border-rose-200 rounded-3xl text-rose-700 max-w-lg mx-auto">
             <AlertCircle className="w-8 h-8 text-rose-500 mx-auto mb-2" />
             <h3 className="font-bold text-base">Error Loading Listings</h3>
             <p className="text-xs text-rose-600 mt-1">{error}</p>
             <button
               onClick={fetchListings}
-              className="mt-4 px-5 py-2 bg-rose-600 text-white rounded-xl text-xs font-bold"
+              className="mt-4 px-5 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold transition shadow-sm"
             >
               Retry
             </button>
@@ -333,24 +365,31 @@ export default function ListingsPage() {
         ) : loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="bg-white rounded-3xl border border-slate-200 p-4 animate-pulse">
-                <div className="aspect-[16/11] bg-slate-200 rounded-2xl mb-4"></div>
-                <div className="h-5 bg-slate-200 rounded w-3/4 mb-2"></div>
-                <div className="h-3 bg-slate-100 rounded w-1/2 mb-4"></div>
-                <div className="h-10 bg-slate-100 rounded-xl"></div>
+              <div key={i} className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-sm animate-pulse space-y-3">
+                <div className="aspect-[16/10] bg-slate-200 rounded-xl"></div>
+                <div className="h-6 bg-slate-200 rounded w-1/3"></div>
+                <div className="h-4 bg-slate-200 rounded w-3/4"></div>
+                <div className="h-3 bg-slate-100 rounded w-1/2"></div>
+                <div className="grid grid-cols-3 gap-2 pt-2">
+                  <div className="h-8 bg-slate-100 rounded-lg"></div>
+                  <div className="h-8 bg-slate-100 rounded-lg"></div>
+                  <div className="h-8 bg-slate-100 rounded-lg"></div>
+                </div>
               </div>
             ))}
           </div>
         ) : displayedListings.length === 0 ? (
-          <div className="text-center py-20 bg-white rounded-3xl border border-slate-200">
+          <div className="text-center py-20 bg-white rounded-3xl border border-slate-200 shadow-sm max-w-xl mx-auto">
             <Home className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-            <h3 className="text-lg font-bold text-slate-800">No properties matched your filters</h3>
-            <p className="text-xs text-slate-500 mt-1">Try resetting filters to explore all available properties.</p>
+            <h3 className="text-lg font-bold text-slate-800">No properties matched your criteria</h3>
+            <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
+              We couldn't find active listings matching your current filter settings.
+            </p>
             <button
               onClick={handleResetFilters}
-              className="mt-5 px-5 py-2.5 bg-slate-900 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl transition shadow-sm"
+              className="mt-5 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition shadow-md shadow-emerald-600/20"
             >
-              Reset Filters
+              Reset All Filters
             </button>
           </div>
         ) : (
@@ -367,7 +406,7 @@ export default function ListingsPage() {
             </div>
 
             {/* Pagination Controls */}
-            <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 p-5 bg-white rounded-2xl border border-slate-200 shadow-sm">
+            <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 p-5 bg-white rounded-2xl border border-slate-200 shadow-card">
               <div className="text-xs font-semibold text-slate-500">
                 Displaying <span className="font-extrabold text-slate-900">{offset + 1}</span> -{" "}
                 <span className="font-extrabold text-slate-900">{offset + displayedListings.length}</span> of retrievable collection
@@ -377,20 +416,20 @@ export default function ListingsPage() {
                 <button
                   onClick={() => setOffset((prev) => Math.max(0, prev - limit))}
                   disabled={offset === 0}
-                  className="px-4 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 text-xs font-bold hover:bg-slate-50 disabled:opacity-40 transition flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 text-xs font-bold hover:bg-slate-50 disabled:opacity-40 transition flex items-center gap-1.5 shadow-xs"
                 >
                   <ChevronLeft className="w-4 h-4" />
                   Previous 50
                 </button>
                 
-                <span className="text-xs font-bold text-slate-700 px-3">
+                <span className="text-xs font-bold text-slate-700 px-3 bg-slate-100 py-2 rounded-xl">
                   Page {Math.floor(offset / limit) + 1}
                 </span>
 
                 <button
                   onClick={() => setOffset((prev) => prev + limit)}
                   disabled={!hasMore || displayedListings.length < limit}
-                  className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-emerald-600 text-white text-xs font-bold disabled:opacity-40 transition flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold disabled:opacity-40 transition flex items-center gap-1.5 shadow-md shadow-emerald-600/20"
                 >
                   Next 50
                   <ChevronRight className="w-4 h-4" />
