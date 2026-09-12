@@ -66,25 +66,26 @@ export default function RentalsPage() {
   return (
     <div className="min-h-screen pb-20">
       
-      {/* Luxury Hero Banner */}
-      <section className="bg-gradient-to-br from-[#064e3b] via-[#065f46] to-[#042f2e] text-white pt-14 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Hero Banner */}
+      <section className="bg-[#09090B] text-white pt-16 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b border-slate-800">
         
-        {/* Glows */}
-        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-emerald-400/10 rounded-full blur-3xl pointer-events-none" />
+        {/* Glow */}
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#0018A8]/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
           
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-emerald-200 text-xs font-bold uppercase tracking-wider mb-4">
-              <KeyRound className="w-3.5 h-3.5 text-amber-300" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md text-[#CBD2FF] text-xs font-bold uppercase tracking-wider mb-4">
+              <KeyRound className="w-3.5 h-3.5 text-[#F9E392]" />
               <span>Rental Homes Portfolio</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white leading-tight">
-              Verified Rental Properties
+              Verified Rental Homes in <br />
+              <span className="text-[#F9E392] italic font-serif">Chennai.</span>
             </h1>
 
-            <p className="mt-3 text-base text-emerald-100/90 font-medium leading-relaxed">
+            <p className="mt-4 text-base text-slate-300 font-medium leading-relaxed">
               Transparent monthly rents, verified security deposits, and carpet areas across Chennai’s key residential hubs.
             </p>
           </div>
@@ -100,12 +101,12 @@ export default function RentalsPage() {
               }`}
             >
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-black ${
-                locality === "Guindy" ? "bg-emerald-600 text-white" : "bg-white/15 text-emerald-300"
+                locality === "Guindy" ? "bg-[#0018A8] text-white" : "bg-white/15 text-[#F9E392]"
               }`}>
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
-                <div className={`text-[10px] font-bold uppercase tracking-wider ${locality === "Guindy" ? "text-emerald-700" : "text-emerald-300"}`}>
+                <div className={`text-[10px] font-bold uppercase tracking-wider ${locality === "Guindy" ? "text-[#0018A8]" : "text-[#CBD2FF]"}`}>
                   Assigned Locality Focus
                 </div>
                 <div className="text-sm font-extrabold">Guindy: 160 Units (₹54.73 L/mo)</div>
@@ -126,7 +127,7 @@ export default function RentalsPage() {
               <select
                 value={locality}
                 onChange={(e) => { setLocality(e.target.value); setOffset(0); }}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0018A8]/20 focus:border-[#0018A8] transition"
               >
                 {CHENNAI_LOCALITIES.map((loc) => (
                   <option key={loc} value={loc}>
@@ -141,7 +142,7 @@ export default function RentalsPage() {
               <select
                 value={bhk}
                 onChange={(e) => { setBhk(e.target.value); setOffset(0); }}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0018A8]/20 focus:border-[#0018A8] transition"
               >
                 <option value="All">All Bedrooms</option>
                 <option value="1">1 BHK</option>
@@ -156,7 +157,7 @@ export default function RentalsPage() {
               <select
                 value={furnishing}
                 onChange={(e) => { setFurnishing(e.target.value); setOffset(0); }}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0018A8]/20 focus:border-[#0018A8] transition"
               >
                 <option value="All">All Furnishing</option>
                 <option value="unfurnished">Unfurnished</option>
@@ -175,7 +176,7 @@ export default function RentalsPage() {
                   setOrder(o);
                   setOffset(0);
                 }}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0018A8]/20 focus:border-[#0018A8] transition"
               >
                 <option value="price-asc">Rent: Low to High</option>
                 <option value="price-desc">Rent: High to Low</option>
@@ -219,7 +220,7 @@ export default function RentalsPage() {
                 return (
                   <div
                     key={rental.listing_id}
-                    className="group bg-white rounded-2xl border border-slate-200/90 hover:border-emerald-500/50 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between overflow-hidden"
+                    className="group bg-white rounded-2xl border border-slate-200/90 hover:border-[#0018A8]/40 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between overflow-hidden"
                   >
                     <div>
                       {/* Image */}
@@ -234,8 +235,8 @@ export default function RentalsPage() {
                         </div>
 
                         <div className="absolute bottom-2.5 left-3">
-                          <span className="text-[11px] font-bold text-white/95 bg-black/50 backdrop-blur-md px-2 py-0.5 rounded-md flex items-center gap-1 border border-white/15">
-                            <MapPin className="w-3 h-3 text-emerald-400" />
+                          <span className="text-[11px] font-bold text-white/95 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-md flex items-center gap-1 border border-white/15">
+                            <MapPin className="w-3 h-3 text-[#F9E392]" />
                             {rental.locality}
                           </span>
                         </div>
@@ -264,15 +265,15 @@ export default function RentalsPage() {
 
                         <div className="mt-4 pt-3 border-t border-slate-100 grid grid-cols-3 gap-1.5 text-slate-700 text-xs font-semibold">
                           <div className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1.5 rounded-xl border border-slate-100">
-                            <BedDouble className="w-3.5 h-3.5 text-emerald-600" />
+                            <BedDouble className="w-3.5 h-3.5 text-[#0018A8]" />
                             <span>{rental.bedroom} BHK</span>
                           </div>
                           <div className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1.5 rounded-xl border border-slate-100">
-                            <Bath className="w-3.5 h-3.5 text-emerald-600" />
+                            <Bath className="w-3.5 h-3.5 text-[#0018A8]" />
                             <span>{rental.bathroom} Bath</span>
                           </div>
                           <div className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1.5 rounded-xl border border-slate-100">
-                            <Maximize2 className="w-3.5 h-3.5 text-emerald-600" />
+                            <Maximize2 className="w-3.5 h-3.5 text-[#0018A8]" />
                             <span>{rental.carpet_area} sqft</span>
                           </div>
                         </div>
@@ -288,7 +289,7 @@ export default function RentalsPage() {
                         </div>
                         <a
                           href={`tel:${rental.posted_by_contact}`}
-                          className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-xs transition shadow-xs flex items-center gap-1.5"
+                          className="px-3.5 py-1.5 bg-[#0018A8] hover:bg-[#00118A] text-white rounded-lg font-bold text-xs transition shadow-xs flex items-center gap-1.5"
                         >
                           <Phone className="w-3 h-3" />
                           <span>Call</span>
@@ -317,7 +318,7 @@ export default function RentalsPage() {
                 <button
                   onClick={() => setOffset((prev) => prev + limit)}
                   disabled={!hasMore || rentals.length < limit}
-                  className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold disabled:opacity-40 transition shadow-md shadow-emerald-600/20"
+                  className="px-4 py-2 rounded-xl bg-[#0018A8] hover:bg-[#00118A] text-white text-xs font-bold disabled:opacity-40 transition shadow-md shadow-[#0018A8]/20"
                 >
                   Next
                 </button>

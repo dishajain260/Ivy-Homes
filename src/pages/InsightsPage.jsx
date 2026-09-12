@@ -40,24 +40,25 @@ export default function InsightsPage() {
   return (
     <div className="min-h-screen pb-20">
       
-      {/* Luxury Hero Banner */}
-      <section className="bg-gradient-to-br from-[#064e3b] via-[#065f46] to-[#042f2e] text-white pt-14 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Hero Banner */}
+      <section className="bg-[#09090B] text-white pt-16 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b border-slate-800">
         
         {/* Glow */}
-        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-emerald-400/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#0018A8]/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-emerald-200 text-xs font-bold uppercase tracking-wider mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md text-[#CBD2FF] text-xs font-bold uppercase tracking-wider mb-4">
+              <Sparkles className="w-3.5 h-3.5 text-[#F9E392]" />
               <span>Market Intelligence & API Audit</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white leading-tight">
-              Chennai Real Estate Insights
+              Chennai Real Estate Insights in <br />
+              <span className="text-[#F9E392] italic font-serif">Deep Detail.</span>
             </h1>
 
-            <p className="mt-3 text-base text-emerald-100/90 font-medium leading-relaxed">
+            <p className="mt-4 text-base text-slate-300 font-medium leading-relaxed">
               Empirical market aggregates derived from complete city datasets, plus our full 18-point verification audit of documentation discrepancies.
             </p>
           </div>
@@ -71,12 +72,12 @@ export default function InsightsPage() {
           <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
               <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500">Audited Listings</span>
-              <Home className="w-5 h-5 text-emerald-600" />
+              <Home className="w-5 h-5 text-[#0018A8]" />
             </div>
             <div className="text-3xl font-black text-slate-900">
               {answers.total_listing_records.toLocaleString()}
             </div>
-            <div className="text-xs text-emerald-700 font-bold mt-1">
+            <div className="text-xs text-[#0018A8] font-bold mt-1">
               {answers.active_listings.toLocaleString()} Active • 3,717 Distinct
             </div>
           </div>
@@ -84,7 +85,7 @@ export default function InsightsPage() {
           <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
               <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500">Avg 2 BHK Rate</span>
-              <TrendingUp className="w-5 h-5 text-emerald-600" />
+              <TrendingUp className="w-5 h-5 text-[#0018A8]" />
             </div>
             <div className="text-3xl font-black text-slate-900">
               ₹{answers.avg_price_per_sqft_2bhk.toLocaleString("en-IN")}
@@ -97,7 +98,7 @@ export default function InsightsPage() {
           <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
               <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500">Guindy Total Rent</span>
-              <DollarSign className="w-5 h-5 text-emerald-600" />
+              <DollarSign className="w-5 h-5 text-[#0018A8]" />
             </div>
             <div className="text-3xl font-black text-slate-900">
               ₹{(answers.total_monthly_rent / 100000).toFixed(2)} L
@@ -110,7 +111,7 @@ export default function InsightsPage() {
           <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-card">
             <div className="flex items-center justify-between text-slate-400 mb-2">
               <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500">Costliest Project</span>
-              <Building2 className="w-5 h-5 text-emerald-600" />
+              <Building2 className="w-5 h-5 text-[#0018A8]" />
             </div>
             <div className="text-3xl font-black text-slate-900">
               ₹{(answers.costliest_project.price_max_inr / 10000000).toFixed(2)} Cr
@@ -132,7 +133,7 @@ export default function InsightsPage() {
             onClick={() => setActiveTab("overview")}
             className={`pb-3.5 transition flex items-center gap-2 border-b-2 ${
               activeTab === "overview"
-                ? "border-emerald-600 text-emerald-800 font-extrabold"
+                ? "border-[#0018A8] text-[#0018A8] font-extrabold"
                 : "border-transparent text-slate-500 hover:text-slate-800"
             }`}
           >
@@ -144,7 +145,7 @@ export default function InsightsPage() {
             onClick={() => setActiveTab("discrepancies")}
             className={`pb-3.5 transition flex items-center gap-2 border-b-2 ${
               activeTab === "discrepancies"
-                ? "border-emerald-600 text-emerald-800 font-extrabold"
+                ? "border-[#0018A8] text-[#0018A8] font-extrabold"
                 : "border-transparent text-slate-500 hover:text-slate-800"
             }`}
           >
@@ -156,7 +157,7 @@ export default function InsightsPage() {
             onClick={() => setActiveTab("anomalies")}
             className={`pb-3.5 transition flex items-center gap-2 border-b-2 ${
               activeTab === "anomalies"
-                ? "border-emerald-600 text-emerald-800 font-extrabold"
+                ? "border-[#0018A8] text-[#0018A8] font-extrabold"
                 : "border-transparent text-slate-500 hover:text-slate-800"
             }`}
           >
@@ -191,19 +192,19 @@ export default function InsightsPage() {
                   {localityAnalytics.map((loc) => {
                     const isGuindy = loc.locality.includes("Guindy");
                     return (
-                      <tr key={loc.locality} className={`hover:bg-slate-50 transition ${isGuindy ? "bg-emerald-50/50 font-bold" : ""}`}>
+                      <tr key={loc.locality} className={`hover:bg-slate-50 transition ${isGuindy ? "bg-[#EEF2FF] font-bold" : ""}`}>
                         <td className="py-3.5 flex items-center gap-2">
-                          <MapPin className={`w-3.5 h-3.5 ${isGuindy ? "text-emerald-600" : "text-slate-400"}`} />
-                          <span className={isGuindy ? "text-emerald-950 font-black" : "text-slate-900"}>{loc.locality}</span>
+                          <MapPin className={`w-3.5 h-3.5 ${isGuindy ? "text-[#0018A8]" : "text-slate-400"}`} />
+                          <span className={isGuindy ? "text-[#0018A8] font-black" : "text-slate-900"}>{loc.locality}</span>
                           {isGuindy && (
-                            <span className="text-[10px] bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded-full font-extrabold">Assigned</span>
+                            <span className="text-[10px] bg-[#CBD2FF] text-[#0018A8] px-2 py-0.5 rounded-full font-extrabold">Assigned</span>
                           )}
                         </td>
                         <td className="py-3.5 text-right font-mono text-slate-900">{loc.listings}</td>
                         <td className="py-3.5 text-right font-semibold">{formatINR(loc.avgPrice)}</td>
                         <td className="py-3.5 text-right font-extrabold text-slate-900">₹{loc.medianSqft.toLocaleString("en-IN")}</td>
                         <td className="py-3.5 text-right font-mono text-slate-900">{loc.rentals}</td>
-                        <td className="py-3.5 text-right font-extrabold text-emerald-700">{formatRent(loc.avgRent)}</td>
+                        <td className="py-3.5 text-right font-extrabold text-[#0018A8]">{formatRent(loc.avgRent)}</td>
                       </tr>
                     );
                   })}
@@ -224,7 +225,7 @@ export default function InsightsPage() {
                   value={searchFinding}
                   onChange={(e) => setSearchFinding(e.target.value)}
                   placeholder="Search findings by endpoint or text..."
-                  className="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0018A8]/20"
                 />
               </div>
 
@@ -235,7 +236,7 @@ export default function InsightsPage() {
                     onClick={() => setFindingCategory(c)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold transition capitalize flex-shrink-0 ${
                       findingCategory === c
-                        ? "bg-emerald-600 text-white shadow-xs"
+                        ? "bg-[#0018A8] text-white shadow-xs"
                         : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                     }`}
                   >
@@ -267,7 +268,7 @@ export default function InsightsPage() {
                       <p className="text-slate-700 leading-relaxed font-mono text-[11px]">{f.documented}</p>
                     </div>
                     <div>
-                      <span className="font-bold text-emerald-700 uppercase tracking-wider block mb-1">
+                      <span className="font-bold text-[#0018A8] uppercase tracking-wider block mb-1">
                         Actual Observed Behavior
                       </span>
                       <p className="text-slate-800 leading-relaxed font-medium">{f.actual}</p>

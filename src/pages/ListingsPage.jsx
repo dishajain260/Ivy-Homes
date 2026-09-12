@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { getListings, getSaved } from "../api/client";
 import PropertyCard from "../components/PropertyCard";
-import { Search, Filter, ArrowUpDown, ChevronLeft, ChevronRight, RefreshCw, AlertCircle, Home, Sparkles, MapPin, CheckCircle2, X } from "lucide-react";
+import { Search, ArrowUpDown, ChevronLeft, ChevronRight, RefreshCw, AlertCircle, Home, Sparkles, MapPin, CheckCircle2, X, Zap, ShieldCheck } from "lucide-react";
 
 const CHENNAI_LOCALITIES = [
   "All",
@@ -130,47 +130,45 @@ export default function ListingsPage() {
   return (
     <div className="min-h-screen pb-20">
       
-      {/* Luxury Hero Banner */}
-      <section className="bg-gradient-to-br from-[#064e3b] via-[#065f46] to-[#042f2e] text-white pt-14 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* High-Impact Hero Banner in Ivy Homes Aesthetic */}
+      <section className="bg-[#09090B] text-white pt-16 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b border-slate-800">
         
-        {/* Subtle Ambient Radial Lighting */}
-        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-emerald-400/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-teal-400/10 rounded-full blur-3xl pointer-events-none" />
+        {/* Klein Blue ambient glow */}
+        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-[#0018A8]/25 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-[450px] h-[450px] bg-[#4F61DA]/15 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="max-w-3xl">
             
-            {/* Top Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-emerald-200 text-xs font-bold uppercase tracking-wider mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-              <span>Chennai Real Estate Intelligence</span>
+            {/* Pill */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md text-[#CBD2FF] text-xs font-bold uppercase tracking-wider mb-5">
+              <img src="/ivy_blue.svg" alt="Ivy Icon" className="h-3.5 w-auto" />
+              <span>Verified Real Estate Platform</span>
             </div>
 
-            {/* Headline */}
+            {/* Headline with italic emphasis matching ivy.homes/sell */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
-              Exceptional Homes, <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 via-teal-100 to-white">
-                Verified Pricing.
-              </span>
+              Discover verified homes with <br />
+              <span className="text-[#F9E392] italic font-serif">complete confidence.</span>
             </h1>
 
             {/* Subhead */}
-            <p className="mt-4 text-base text-emerald-100/90 font-medium leading-relaxed">
-              Explore 3,233+ verified residential properties across Chennai’s most sought-after neighborhoods with unit-corrected square footage and authentic pricing.
+            <p className="mt-4 text-base text-slate-300 font-medium leading-relaxed">
+              Explore 3,233+ authentic residential properties in Chennai. Filter by carpet area, view verified developer metrics, and bypass broker inflation.
             </p>
 
             {/* Benchmark Pill Strip */}
             <div className="flex flex-wrap items-center gap-2.5 mt-6 text-xs font-semibold">
-              <span className="px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 text-white flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" />
+              <span className="px-3.5 py-1.5 rounded-xl bg-slate-900/90 backdrop-blur-md border border-slate-700 text-slate-200 flex items-center gap-1.5 shadow-xs">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#25D366]" />
                 3,233 Active Listings
               </span>
-              <span className="px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 text-white flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-emerald-300" />
+              <span className="px-3.5 py-1.5 rounded-xl bg-slate-900/90 backdrop-blur-md border border-slate-700 text-slate-200 flex items-center gap-1.5 shadow-xs">
+                <MapPin className="w-3.5 h-3.5 text-[#F9E392]" />
                 10 Core Localities
               </span>
-              <span className="px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 text-white flex items-center gap-1.5">
-                <span className="text-emerald-300 font-bold">₹9,845</span> Avg 2BHK / sq.ft
+              <span className="px-3.5 py-1.5 rounded-xl bg-slate-900/90 backdrop-blur-md border border-slate-700 text-slate-200 flex items-center gap-1.5 shadow-xs">
+                <span className="text-[#CBD2FF] font-bold">₹9,845</span> Avg 2BHK / sq.ft
               </span>
             </div>
 
@@ -193,7 +191,7 @@ export default function ListingsPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search apartment, society, road..."
-                className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-medium text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
+                className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-medium text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0018A8]/20 focus:border-[#0018A8] transition"
               />
               {searchQuery && (
                 <button
@@ -210,7 +208,7 @@ export default function ListingsPage() {
               <select
                 value={locality}
                 onChange={(e) => { setLocality(e.target.value); setOffset(0); }}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0018A8]/20 focus:border-[#0018A8] transition"
               >
                 {CHENNAI_LOCALITIES.map((loc) => (
                   <option key={loc} value={loc}>
@@ -225,7 +223,7 @@ export default function ListingsPage() {
               <select
                 value={propertyType}
                 onChange={(e) => { setPropertyType(e.target.value); setOffset(0); }}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0018A8]/20 focus:border-[#0018A8] transition"
               >
                 {PROPERTY_TYPES.map((t) => (
                   <option key={t} value={t}>
@@ -240,7 +238,7 @@ export default function ListingsPage() {
               <select
                 value={furnishing}
                 onChange={(e) => { setFurnishing(e.target.value); setOffset(0); }}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0018A8]/20 focus:border-[#0018A8] transition"
               >
                 {FURNISHING_OPTIONS.map((f) => (
                   <option key={f} value={f}>
@@ -264,9 +262,9 @@ export default function ListingsPage() {
                   <button
                     key={b}
                     onClick={() => { setBhk(b); setOffset(0); }}
-                    className={`px-3 py-1.5 rounded-xl font-bold transition ${
+                    className={`px-3.5 py-1.5 rounded-xl font-bold transition ${
                       isSelected
-                        ? "bg-emerald-600 text-white shadow-xs"
+                        ? "bg-[#0018A8] text-white shadow-xs"
                         : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                     }`}
                   >
@@ -283,7 +281,7 @@ export default function ListingsPage() {
                   type="checkbox"
                   checked={liveOnly}
                   onChange={(e) => setLiveOnly(e.target.checked)}
-                  className="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 border-slate-300"
+                  className="w-4 h-4 rounded text-[#0018A8] focus:ring-[#0018A8] border-slate-300"
                 />
                 <span>Active Only</span>
               </label>
@@ -323,7 +321,7 @@ export default function ListingsPage() {
                 className="p-2 text-slate-400 hover:text-slate-800 hover:bg-slate-100 rounded-xl transition"
                 title="Refresh listings"
               >
-                <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin text-emerald-600" : ""}`} />
+                <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin text-[#0018A8]" : ""}`} />
               </button>
             </div>
 
@@ -341,11 +339,12 @@ export default function ListingsPage() {
             <div>
               Showing <span className="font-bold text-slate-900">{displayedListings.length}</span> properties
               {locality !== "All" && (
-                <span> in <span className="font-bold text-emerald-700">{locality}</span></span>
+                <span> in <span className="font-bold text-[#0018A8]">{locality}</span></span>
               )}
             </div>
-            <div className="text-xs text-slate-400 hidden sm:block">
-              Data verified against Ivy Homes registry
+            <div className="text-xs text-slate-400 hidden sm:flex items-center gap-1">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#0018A8]" />
+              <span>Data verified against official Ivy Homes registry</span>
             </div>
           </div>
         )}
@@ -387,7 +386,7 @@ export default function ListingsPage() {
             </p>
             <button
               onClick={handleResetFilters}
-              className="mt-5 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition shadow-md shadow-emerald-600/20"
+              className="mt-5 px-5 py-2.5 bg-[#0018A8] hover:bg-[#00118A] text-white text-xs font-bold rounded-xl transition shadow-md shadow-[#0018A8]/20"
             >
               Reset All Filters
             </button>
@@ -429,7 +428,7 @@ export default function ListingsPage() {
                 <button
                   onClick={() => setOffset((prev) => prev + limit)}
                   disabled={!hasMore || displayedListings.length < limit}
-                  className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold disabled:opacity-40 transition flex items-center gap-1.5 shadow-md shadow-emerald-600/20"
+                  className="px-4 py-2 rounded-xl bg-[#0018A8] hover:bg-[#00118A] text-white text-xs font-bold disabled:opacity-40 transition flex items-center gap-1.5 shadow-md shadow-[#0018A8]/25"
                 >
                   Next 50
                   <ChevronRight className="w-4 h-4" />

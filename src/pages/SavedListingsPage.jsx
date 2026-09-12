@@ -36,24 +36,25 @@ export default function SavedListingsPage() {
   return (
     <div className="min-h-screen pb-20">
       
-      {/* Luxury Hero Banner */}
-      <section className="bg-gradient-to-br from-[#064e3b] via-[#065f46] to-[#042f2e] text-white pt-14 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Hero Banner */}
+      <section className="bg-[#09090B] text-white pt-16 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b border-slate-800">
         
         {/* Glow */}
-        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-emerald-400/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#0018A8]/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-emerald-200 text-xs font-bold uppercase tracking-wider mb-4">
-              <Bookmark className="w-3.5 h-3.5 text-amber-300" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md text-[#CBD2FF] text-xs font-bold uppercase tracking-wider mb-4">
+              <Bookmark className="w-3.5 h-3.5 text-[#F9E392]" />
               <span>Personal Shortlist</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white leading-tight">
-              Saved Properties
+              Saved Properties in <br />
+              <span className="text-[#F9E392] italic font-serif">Chennai.</span>
             </h1>
 
-            <p className="mt-3 text-base text-emerald-100/90 font-medium">
+            <p className="mt-4 text-base text-slate-300 font-medium">
               Synchronized with authorized account <span className="text-white font-bold">{user?.email || "User"}</span>.
             </p>
           </div>
@@ -62,7 +63,7 @@ export default function SavedListingsPage() {
             onClick={fetchSaved}
             className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-bold transition flex items-center gap-2 border border-white/20 shadow-xs backdrop-blur-md"
           >
-            <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin text-emerald-300" : ""}`} />
+            <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin text-[#F9E392]" : ""}`} />
             Refresh Shortlist
           </button>
         </div>
@@ -95,7 +96,7 @@ export default function SavedListingsPage() {
             </p>
             <Link
               to="/"
-              className="mt-6 inline-flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition shadow-md shadow-emerald-600/20"
+              className="mt-6 inline-flex items-center gap-2 px-6 py-2.5 bg-[#0018A8] hover:bg-[#00118A] text-white text-xs font-bold rounded-xl transition shadow-md shadow-[#0018A8]/20"
             >
               <Home className="w-4 h-4" />
               Explore Properties

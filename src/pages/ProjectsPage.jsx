@@ -60,24 +60,25 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen pb-20">
       
-      {/* Luxury Hero Banner */}
-      <section className="bg-gradient-to-br from-[#064e3b] via-[#065f46] to-[#042f2e] text-white pt-14 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Hero Banner */}
+      <section className="bg-[#09090B] text-white pt-16 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b border-slate-800">
         
         {/* Glow */}
-        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-emerald-400/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#0018A8]/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-emerald-200 text-xs font-bold uppercase tracking-wider mb-4">
-              <Building2 className="w-3.5 h-3.5 text-amber-300" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md text-[#CBD2FF] text-xs font-bold uppercase tracking-wider mb-4">
+              <Building2 className="w-3.5 h-3.5 text-[#F9E392]" />
               <span>Gated Communities & Societies</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white leading-tight">
-              RERA Builder Developments
+              RERA Builder Developments in <br />
+              <span className="text-[#F9E392] italic font-serif">Chennai.</span>
             </h1>
 
-            <p className="mt-3 text-base text-emerald-100/90 font-medium leading-relaxed">
+            <p className="mt-4 text-base text-slate-300 font-medium leading-relaxed">
               Explore premier residential communities across Chennai with verified unit counts, tower infrastructure, and normalized rupee valuations.
             </p>
           </div>
@@ -94,7 +95,7 @@ export default function ProjectsPage() {
               <select
                 value={locality}
                 onChange={(e) => { setLocality(e.target.value); setOffset(0); }}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0018A8]/20 focus:border-[#0018A8] transition"
               >
                 {CHENNAI_LOCALITIES.map((loc) => (
                   <option key={loc} value={loc}>
@@ -109,7 +110,7 @@ export default function ProjectsPage() {
               <select
                 value={status}
                 onChange={(e) => { setStatus(e.target.value); setOffset(0); }}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0018A8]/20 focus:border-[#0018A8] transition"
               >
                 <option value="All">All Statuses</option>
                 <option value="under construction">Under Construction</option>
@@ -152,7 +153,7 @@ export default function ProjectsPage() {
                 return (
                   <div
                     key={proj.project_id}
-                    className="group bg-white rounded-2xl border border-slate-200/90 hover:border-emerald-500/50 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between overflow-hidden"
+                    className="group bg-white rounded-2xl border border-slate-200/90 hover:border-[#0018A8]/40 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between overflow-hidden"
                   >
                     <div>
                       {/* Image */}
@@ -162,15 +163,15 @@ export default function ProjectsPage() {
                         
                         <div className="absolute top-3 left-3">
                           <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-extrabold shadow-xs capitalize ${
-                            isReady ? "bg-emerald-600 text-white" : "bg-blue-600 text-white"
+                            isReady ? "bg-emerald-600 text-white" : "bg-[#0018A8] text-white"
                           }`}>
                             {proj.project_status}
                           </span>
                         </div>
 
                         <div className="absolute bottom-2.5 left-3">
-                          <span className="text-[11px] font-bold text-white/95 bg-black/50 backdrop-blur-md px-2 py-0.5 rounded-md flex items-center gap-1 border border-white/15">
-                            <MapPin className="w-3 h-3 text-emerald-400" />
+                          <span className="text-[11px] font-bold text-white/95 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-md flex items-center gap-1 border border-white/15">
+                            <MapPin className="w-3 h-3 text-[#F9E392]" />
                             {proj.locality}
                           </span>
                         </div>
@@ -184,7 +185,7 @@ export default function ProjectsPage() {
                           </span>
                         </div>
 
-                        <div className="text-xs font-semibold text-emerald-700 mt-1">
+                        <div className="text-xs font-semibold text-[#0018A8] mt-1">
                           {proj.min_area_sqft} - {proj.max_area_sqft} sq.ft
                         </div>
 
@@ -233,7 +234,7 @@ export default function ProjectsPage() {
                     <div className="p-4 sm:p-5 pt-0">
                       <div className="p-2.5 bg-slate-50 rounded-xl flex items-center justify-between text-xs border border-slate-100">
                         <span className="flex items-center gap-1 font-mono text-[11px] text-slate-500 font-bold">
-                          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                          <ShieldCheck className="w-3.5 h-3.5 text-[#0018A8]" />
                           {proj.rera_number || "TN/RERA/Registered"}
                         </span>
                         <span className="font-extrabold text-slate-700 text-xs">
@@ -262,7 +263,7 @@ export default function ProjectsPage() {
                 <button
                   onClick={() => setOffset((prev) => prev + limit)}
                   disabled={!hasMore || projects.length < limit}
-                  className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold disabled:opacity-40 transition shadow-md shadow-emerald-600/20"
+                  className="px-4 py-2 rounded-xl bg-[#0018A8] hover:bg-[#00118A] text-white text-xs font-bold disabled:opacity-40 transition shadow-md shadow-[#0018A8]/20"
                 >
                   Next
                 </button>

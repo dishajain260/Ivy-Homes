@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { formatINR, saveListing, unsaveListing } from "../api/client";
 import { Heart, BedDouble, Bath, Maximize2, ShieldCheck, MapPin, ArrowRight, AlertTriangle } from "lucide-react";
 
-// Curated high-resolution real estate photography
 const IMAGES = [
   "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=80",
   "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80",
@@ -42,7 +41,7 @@ export default function PropertyCard({ listing, isSavedInitially = false, onTogg
   const formattedArea = listing.carpet_area_sqft || listing.carpet_area || 0;
 
   return (
-    <div className="group bg-white rounded-2xl border border-slate-200/90 hover:border-emerald-500/50 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col overflow-hidden">
+    <div className="group bg-white rounded-2xl border border-slate-200/90 hover:border-[#0018A8]/40 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col overflow-hidden">
       
       {/* Top Image Container */}
       <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
@@ -70,8 +69,8 @@ export default function PropertyCard({ listing, isSavedInitially = false, onTogg
             )}
 
             {listing.is_verified && (
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-slate-900/85 text-emerald-300 backdrop-blur-md shadow-xs flex items-center gap-1 border border-white/10">
-                <ShieldCheck className="w-3 h-3" /> Verified
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-[#0018A8] text-white backdrop-blur-md shadow-xs flex items-center gap-1 border border-white/20">
+                <ShieldCheck className="w-3 h-3 text-[#F9E392]" /> Verified by Ivy
               </span>
             )}
 
@@ -109,10 +108,10 @@ export default function PropertyCard({ listing, isSavedInitially = false, onTogg
           </button>
         </div>
 
-        {/* Bottom image pill tag */}
+        {/* Bottom image location tag */}
         <div className="absolute bottom-2.5 left-3 pointer-events-none">
-          <span className="text-[11px] font-bold text-white/95 bg-black/50 backdrop-blur-md px-2 py-0.5 rounded-md flex items-center gap-1 border border-white/15">
-            <MapPin className="w-3 h-3 text-emerald-400" />
+          <span className="text-[11px] font-bold text-white/95 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-md flex items-center gap-1 border border-white/15">
+            <MapPin className="w-3 h-3 text-[#F9E392]" />
             {listing.locality || "Chennai"}
           </span>
         </div>
@@ -129,7 +128,7 @@ export default function PropertyCard({ listing, isSavedInitially = false, onTogg
               {formatINR(listing.price)}
             </span>
             {listing.price_per_sqft > 0 && (
-              <span className="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2 py-0.5 rounded-lg">
+              <span className="text-xs font-bold text-[#0018A8] bg-[#EEF2FF] border border-[#CBD2FF] px-2 py-0.5 rounded-lg">
                 ₹{listing.price_per_sqft.toLocaleString("en-IN")}/sq.ft
               </span>
             )}
@@ -138,7 +137,7 @@ export default function PropertyCard({ listing, isSavedInitially = false, onTogg
           {/* Property Title */}
           <Link
             to={`/listings/${listing.listing_id}`}
-            className="block text-base font-bold text-slate-900 hover:text-emerald-700 transition line-clamp-1 mt-2 group-hover:underline decoration-emerald-500/40 underline-offset-2"
+            className="block text-base font-bold text-slate-900 hover:text-[#0018A8] transition line-clamp-1 mt-2 group-hover:underline decoration-[#0018A8]/40 underline-offset-2"
           >
             {listing.apartment_name || "Chennai Residential Property"}
           </Link>
@@ -155,15 +154,15 @@ export default function PropertyCard({ listing, isSavedInitially = false, onTogg
           {/* Spec Pills */}
           <div className="grid grid-cols-3 gap-1.5 text-slate-700 text-xs font-semibold mb-3.5">
             <div className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1.5 rounded-xl border border-slate-100">
-              <BedDouble className="w-3.5 h-3.5 text-emerald-600" />
+              <BedDouble className="w-3.5 h-3.5 text-[#0018A8]" />
               <span>{listing.bedroom ? `${listing.bedroom} BHK` : "Studio"}</span>
             </div>
             <div className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1.5 rounded-xl border border-slate-100">
-              <Bath className="w-3.5 h-3.5 text-emerald-600" />
+              <Bath className="w-3.5 h-3.5 text-[#0018A8]" />
               <span>{listing.bathroom || 1} Bath</span>
             </div>
             <div className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1.5 rounded-xl border border-slate-100">
-              <Maximize2 className="w-3.5 h-3.5 text-emerald-600" />
+              <Maximize2 className="w-3.5 h-3.5 text-[#0018A8]" />
               <span>{formattedArea} sqft</span>
             </div>
           </div>
@@ -176,9 +175,9 @@ export default function PropertyCard({ listing, isSavedInitially = false, onTogg
 
             <Link
               to={`/listings/${listing.listing_id}`}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 hover:text-emerald-800 transition group/link"
+              className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#0018A8] hover:text-[#00118A] transition group/link"
             >
-              <span>View Details</span>
+              <span>Explore Property</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
             </Link>
           </div>
