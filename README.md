@@ -126,7 +126,7 @@ npm run dev
 Open `http://localhost:3000` in your browser.
 
 ### 2. Login Credentials
-Authorized demo accounts (all use the assigned password `9c07e285fc`):
+Authorized demo accounts:
 - `demo1@ivy.homes`
 - `demo2@ivy.homes`
 - `demo3@ivy.homes`
